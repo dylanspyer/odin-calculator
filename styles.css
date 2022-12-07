@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 48px;
+  padding: 20px 0;
+  margin-bottom: 36px;
+}
+
+.calculator {
+  margin: 0 auto;
+  width: 400px;
+  padding: 20px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+
+button {
+  padding: 20px;
+}
