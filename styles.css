@@ -11,10 +11,24 @@
   margin-bottom: 36px;
 }
 
+.screen {
+  text-align: right;
+  border: 1px solid black;
+  padding: 40px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  align-items: baseline;
+}
+
+.output {
+}
+
 .calculator {
   margin: 0 auto;
   width: 400px;
   padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .button-grid {
@@ -24,5 +38,7 @@
 }
 
 button {
-  padding: 20px;
+  padding: 30px;
+  cursor: pointer;
+  border-radius: 20px;
 }
