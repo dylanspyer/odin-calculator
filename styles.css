@@ -11,6 +11,14 @@
   margin-bottom: 36px;
 }
 
+.calculator {
+  margin: 0 auto;
+  width: 400px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
 .screen {
   text-align: right;
   border: 1px solid black;
@@ -23,12 +31,18 @@
 .output {
 }
 
-.calculator {
-  margin: 0 auto;
-  width: 400px;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 5px;
+.container {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0px;
+}
+
+.clear-button {
+  flex-grow: 1;
+}
+
+.delete-button {
+  flex-grow: 1;
 }
 
 .button-grid {

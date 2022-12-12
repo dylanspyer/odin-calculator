@@ -12,25 +12,29 @@
     <h1 class="page-title">A calculator for calculating stuff</h1>
     <div class="calculator">
       <div class="screen">
-        <p class="output">11</p>
+        <p class="output"></p>
+      </div>
+      <div class="container">
+        <button class="clear-button">Clear</button>
+        <button class="delete-button">Delete</button>
       </div>
       <div class="button-grid">
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>÷</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>×</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>-</button>
-        <button>.</button>
-        <button>0</button>
-        <button>=</button>
-        <button>+</button>
+        <button class="btn number-btn" data-number="7">7</button>
+        <button class="btn number-btn" data-number="8">8</button>
+        <button class="btn number-btn" data-number="9">9</button>
+        <button class="btn divide operator-btn">÷</button>
+        <button class="btn number-btn" data-number="4">4</button>
+        <button class="btn number-btn" data-number="5">5</button>
+        <button class="btn number-btn" data-number="6">6</button>
+        <button class="btn multiply operator-btn">×</button>
+        <button class="btn number-btn" data-number="1">1</button>
+        <button class="btn number-btn" data-number="2">2</button>
+        <button class="btn number-btn" data-number="3">3</button>
+        <button class="btn subtract operator-btn">-</button>
+        <button class="btn decimal number-btn">.</button>
+        <button class="btn number-btn" data-number="0">0</button>
+        <button class="equals">=</button>
+        <button class="btn add operator-btn">+</button>
       </div>
     </div>
   </body>
