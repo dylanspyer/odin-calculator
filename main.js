@@ -130,19 +130,21 @@ equalsBtn.onclick = function () {
   if (currentValue != "" && previousValue != "") {
     operate();
     secondaryOutput.textContent = "";
+    currentValue = previousValue;
     if (previousValue.length <= 5) {
       mainOutput.textContent = previousValue;
     } else {
       mainOutput.textContent = previousValue.slice(0, 5) + "...";
     }
   }
+  console.log(currentValue);
+  console.log(previousValue);
 };
 
 numberBtn.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     handleNumber(e.target.textContent);
     mainOutput.textContent = currentValue;
-    console.log(currentValue);
   });
 });
 
