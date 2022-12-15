@@ -34,21 +34,19 @@
 //       return divide(...args);
 //   }
 let displayValue = "0";
-let operator = null;
-let firstOperand = null;
-let secondOperand = null;
-let result = null;
+let operator = "";
+let currentValue = "";
+let previousValue = "";
+let result = "";
 
-const btn = document.querySelectorAll(".btn");
 const numberBtn = document.querySelectorAll(".number-btn");
 const operatorBtn = document.querySelectorAll(".operator-btn");
-const divideBtn = document.querySelector(".divide");
-const multiplyBtn = document.querySelector(".multiply");
-const addBtn = document.querySelector(".add");
-const subtractBtn = document.querySelector(".subtract");
 const equalsBtn = document.querySelector(".equals");
-const clearBtn = document.querySelector(".clear-button");
-const output = document.querySelector(".output");
+const clearBtn = document.querySelector(".clear-btn");
+const deleteBtn = document.querySelector(".delete-btn");
+const decimalBtn = document.querySelector(".decimal");
+let mainOutput = document.querySelector(".main-output");
+let secondaryOutput = document.querySelector(".secondary-output");
 
 function add(a, b) {
   return a + b;
@@ -66,65 +64,97 @@ function multiply(a, b) {
   return a * b;
 }
 
-function operate(a, b, operator) {
-  switch (operator) {
-    case "+":
-      return add(a, b);
-    case "-":
-      return subtract(a, b);
-    case "×":
-      return multiply(a, b);
-    case "÷":
-      return divide(a, b);
+function operate() {
+  previousValue = Number(previousValue);
+  currentValue = Number(currentValue);
+
+  if (operator === "+") {
+    previousValue += currentValue;
+  } else if (operator === "-") {
+    previousValue -= currentValue;
+  } else if (operator === "×") {
+    previousValue *= currentValue;
+  } else if (operator === "÷") {
+    previousValue /= currentValue;
+  }
+
+  previousValue = roundNumber(previousValue);
+  previousValue = previousValue.toString();
+  currentValue = currentValue.toString();
+}
+
+function deleteLast() {
+  currentValue = currentValue.slice(0, -1);
+  mainOutput.textContent = currentValue;
+}
+
+deleteBtn.onclick = () => deleteLast();
+
+function roundNumber(num) {
+  return Math.round(num * 1000) / 1000;
+}
+
+function handleNumber(num) {
+  if (currentValue.length <= 5) {
+    currentValue += num;
   }
 }
 
-function handleClick() {
-  if (operator === null) {
-    firstOperand = parseInt(output.textContent);
-  } else if (operator != null && result === null) {
-    secondOperand = parseInt(output.textContent);
-  } else if (result != null) {
-    firstOperand = result;
-    secondOperand = Number(displayValue);
+function handleOperator(op) {
+  operator = op;
+  previousValue = currentValue;
+  currentValue = "";
+}
+
+function addDecimal() {
+  currentValue = currentValue.toString();
+  if (!currentValue.includes(".")) {
+    currentValue += ".";
   }
 }
+
+decimalBtn.onclick = () => addDecimal();
 
 function clear() {
-  output.textContent = "";
-  firstOperand = null;
-  secondOperand = null;
-  operator = null;
-  result = null;
-  console.log(firstOperand);
-  console.log(secondOperand);
-  console.log(result);
+  mainOutput.textContent = "";
+  secondaryOutput.textContent = "";
+  previousValue = "";
+  currentValue = "";
+  operator = "";
+  result = "";
 }
 
 clearBtn.onclick = () => clear();
 
 equalsBtn.onclick = function () {
-  result = Number(operate(firstOperand, secondOperand, operator));
-  output.textContent = result;
-  console.log(firstOperand);
-  console.log(secondOperand);
-  console.log(result);
+  if (currentValue != "" && previousValue != "") {
+    operate();
+    secondaryOutput.textContent = "";
+    if (previousValue.length <= 5) {
+      mainOutput.textContent = previousValue;
+    } else {
+      mainOutput.textContent = previousValue.slice(0, 5) + "...";
+    }
+  }
 };
 
 numberBtn.forEach((btn) => {
-  btn.addEventListener("click", function (event) {
-    output.textContent += event.target.innerText;
-    displayValue = output.textContent;
-    handleClick();
+  btn.addEventListener("click", function (e) {
+    handleNumber(e.target.textContent);
+    mainOutput.textContent = currentValue;
+    console.log(currentValue);
   });
 });
 
-operatorBtn.forEach((btn) => {
-  btn.addEventListener("click", function (event) {
-    operator = event.target.innerText;
-    output.textContent = "";
+operatorBtn.forEach((op) => {
+  op.addEventListener("click", function (e) {
+    handleOperator(e.target.textContent);
+    secondaryOutput.textContent = `${previousValue} ${operator}`;
+    mainOutput.textContent = currentValue;
   });
 });
 
-//Bug - if you evaluate an equation and then add numbers to the result, it doesn't change firstOperand to include the numbers you added:
+//Bug - if you evaluate an equation and then add numbers to the result, it doesn't change previousValue to include the numbers you added:
 //How it should work: get rid of what's on the screen and start a new equation if you press a number
+
+//Bug - After you have a currentValue and currentValue, if you press an operator button instead of equals, the equation doesn't get evaluated.
